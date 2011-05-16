@@ -1,4 +1,12 @@
-class squid {
+class squid( $localnet_src = '10.0.0.0/8',
+	$cache_replacement_policy = 'lru',
+	$cache_dir_type = 'ufs',
+	$cache_dir_size = 100,
+	$maximum_object_size = '4096 KB',
+	$cache_swap_low = 90,
+	$cache_swap_high = 95,
+	$log_fqdn = off,
+	$cachemgr_passwd = disable ) {
 	package { 'squid3':
 		ensure	=> installed,
 	}

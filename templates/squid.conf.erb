@@ -656,6 +656,7 @@ acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
 #acl localnet src 192.168.0.0/16	# RFC1918 possible internal network
 #acl localnet src fc00::/7       # RFC 4193 local private network range
 #acl localnet src fe80::/10      # RFC 4291 link-local (directly plugged) machines
+acl localnet src <%= localnet_src %>
 
 acl SSL_ports port 443
 acl Safe_ports port 80		# http
@@ -788,7 +789,7 @@ http_access deny to_localhost
 # Example rule allowing access from your local networks.
 # Adapt localnet in the ACL section to list your (internal) IP networks
 # from where browsing should be allowed
-#http_access allow localnet
+http_access allow localnet
 http_access allow localhost
 
 # And finally deny all other access to this proxy
@@ -2008,6 +2009,7 @@ hierarchy_stoplist cgi-bin ?
 #	and http://fog.hpl.external.hp.com/techreports/98/HPL-98-173.html.
 #Default:
 # cache_replacement_policy lru
+cache_replacement_policy <%= cache_replacement_policy %>
 
 #  TAG: cache_dir
 #	Usage:
@@ -2116,6 +2118,7 @@ hierarchy_stoplist cgi-bin ?
 
 # Uncomment and adjust the following to add a disk cache directory.
 #cache_dir ufs /var/spool/squid3 100 16 256
+cache_dir <%= cache_dir_type %> /var/spool/squid3 <%= cache_dir_size %> 16 256
 
 #  TAG: store_dir_select_algorithm
 #	Set this to 'round-robin' as an alternative.
@@ -2151,6 +2154,7 @@ hierarchy_stoplist cgi-bin ?
 #	See replacement_policy below for a discussion of this policy.
 #Default:
 # maximum_object_size 4096 KB
+maximum_object_size <%= maximum_object_size %>
 
 #  TAG: cache_swap_low	(percent, 0-100)
 #  TAG: cache_swap_high	(percent, 0-100)
@@ -2168,6 +2172,8 @@ hierarchy_stoplist cgi-bin ?
 #Default:
 # cache_swap_low 90
 # cache_swap_high 95
+cache_swap_low <%= cache_swap_low %>
+cache_swap_high <%= cache_swap_high %>
 
 # LOGFILE OPTIONS
 # -----------------------------------------------------------------------------
@@ -2561,6 +2567,7 @@ hierarchy_stoplist cgi-bin ?
 #	browsing.
 #Default:
 # log_fqdn off
+log_fqdn <%= log_fqdn %>
 
 #  TAG: client_netmask
 #	A netmask for client addresses in logfiles and cachemgr output.
@@ -2791,6 +2798,7 @@ coredump_dir /var/spool/squid3
 #	By default, a URL rewriter is not used.
 #Default:
 # none
+url_rewrite_program /usr/bin/adzapper.wrapper
 
 #  TAG: url_rewrite_children
 #	The number of redirector processes to spawn. If you start
@@ -5367,6 +5375,7 @@ refresh_pattern .		0	20%	4320
 # cachemgr_passwd disable all
 #Default:
 # none
+cachemgr_passwd <%= cachemgr_passwd %> all
 
 #  TAG: client_db	on|off
 #	If you want to disable collecting per-client statistics,
