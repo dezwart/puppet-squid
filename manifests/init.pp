@@ -31,6 +31,5 @@ class squid( $localnet_src = '10.0.0.0/8',
 		enable		=> true,
 		require		=> Package['squid3'],
 		subscribe	=> File['/etc/squid3/squid.conf'],
-		pattern		=> '/usr/sbin/squid',
 	}
 }
