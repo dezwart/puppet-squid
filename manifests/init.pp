@@ -6,7 +6,8 @@ class squid( $localnet_src = '10.0.0.0/8',
 	$cache_swap_low = 90,
 	$cache_swap_high = 95,
 	$log_fqdn = off,
-	$cachemgr_passwd = disable ) {
+	$cachemgr_passwd = disable,
+	$visible_hostname = undef ) {
 	package { 'squid3':
 		ensure	=> installed,
 	}
@@ -30,5 +31,6 @@ class squid( $localnet_src = '10.0.0.0/8',
 		enable		=> true,
 		require		=> Package['squid3'],
 		subscribe	=> File['/etc/squid3/squid.conf'],
+		pattern		=> '/usr/sbin/squid',
 	}
 }

@@ -3588,6 +3588,7 @@ refresh_pattern .		0	20%	4320
 #	names with this setting.
 #Default:
 # visible_hostname localhost
+<% if visible_hostname != :undef %>visible_hostname <%= visible_hostname %><% end %>
 
 #  TAG: unique_hostname
 #	If you want to have multiple machines with the same
