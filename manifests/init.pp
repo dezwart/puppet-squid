@@ -30,6 +30,7 @@ class squid( $localnet_src = '10.0.0.0/8',
 		ensure		=> running,
 		enable		=> true,
 		require		=> Package['squid3'],
+		restart		=> '/etc/init.d/squid3 reload',
 		subscribe	=> File['/etc/squid3/squid.conf'],
 	}
 }
