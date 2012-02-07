@@ -669,7 +669,8 @@ acl Safe_ports port 280     # http-mgmt
 acl Safe_ports port 488     # gss-http
 acl Safe_ports port 591     # filemaker
 acl Safe_ports port 777     # multiling http
-acl CONNECT method CONNECT
+acl CONNECT method CONNECT<% if snmp_port != :undef %>
+acl snmppublic snmp_community public<% end %>
 
 #  TAG: follow_x_forwarded_for
 #   Allowing or Denying the X-Forwarded-For header to be followed to
@@ -3588,8 +3589,8 @@ refresh_pattern .       0   20% 4320
 #   get errors about IP-forwarding you must set them to have individual
 #   names with this setting.
 #Default:
-# visible_hostname localhost
-<% if visible_hostname != :undef %>visible_hostname <%= visible_hostname %><% end %>
+# visible_hostname localhost<% if visible_hostname != :undef %>
+visible_hostname <%= visible_hostname %><% end %>
 
 #  TAG: unique_hostname
 #   If you want to have multiple machines with the same
@@ -4091,7 +4092,8 @@ refresh_pattern .       0   20% 4320
 #   Example:
 #       snmp_port 3401
 #Default:
-# snmp_port 0
+# snmp_port 0<% if snmp_port != :undef %>
+snmp_port <%= snmp_port %><% end %>
 
 #  TAG: snmp_access
 #   Allowing or denying access to the SNMP port.
@@ -4107,7 +4109,9 @@ refresh_pattern .       0   20% 4320
 # snmp_access allow snmppublic localhost
 # snmp_access deny all
 #Default:
-# snmp_access deny all
+# snmp_access deny all<% if snmp_port != :undef %>
+snmp_access allow snmppublic localhost
+snmp_access deny all<% end %>
 
 #  TAG: snmp_incoming_address
 #  TAG: snmp_outgoing_address
