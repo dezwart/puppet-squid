@@ -1,4 +1,7 @@
 class squid( $localnet_src = '10.0.0.0/8',
+    $cache_mem = '256 MB',
+    $maximum_object_size_in_memory = '512 KB',
+    $memory_replacement_policy = 'lru',
     $cache_replacement_policy = 'lru',
     $cache_dir_type = 'ufs',
     $cache_dir_size = 100,
