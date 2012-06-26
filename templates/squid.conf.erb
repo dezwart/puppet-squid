@@ -2803,7 +2803,7 @@ coredump_dir /var/spool/squid3
 #   By default, a URL rewriter is not used.
 #Default:
 # none
-url_rewrite_program /usr/bin/adzapper.wrapper
+<% if adzapper %>url_rewrite_program /usr/bin/adzapper.wrapper<% end %>
 
 #  TAG: url_rewrite_children
 #   The number of redirector processes to spawn. If you start

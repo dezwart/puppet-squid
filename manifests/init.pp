@@ -11,14 +11,17 @@ class squid( $localnet_src = '10.0.0.0/8',
     $log_fqdn = off,
     $cachemgr_passwd = disable,
     $visible_hostname = undef,
-    $snmp_port = undef ) {
+    $snmp_port = undef,
+    $adzapper = false ) {
     package { 'squid3':
         ensure  => installed,
     }
 
-    package { 'adzapper':
-        ensure  => installed,
-        require => Package['squid3'],
+    if $adzapper {
+        package { 'adzapper':
+            ensure  => installed,
+            require => Package['squid3'],
+        }
     }
 
     file { '/etc/squid3/squid.conf':
