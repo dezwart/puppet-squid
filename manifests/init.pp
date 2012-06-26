@@ -49,7 +49,7 @@ class squid( $localnet_src = '10.0.0.0/8',
     }
 
     exec { 'Init cache dir':
-        command => "service $service stop && $service -z"
+        command => "service $service stop && $service -z",
         path    => "/usr/sbin",
         creates => "$cache_dir/00",
         notify  => Service[$service],
