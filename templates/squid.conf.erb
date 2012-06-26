@@ -2122,7 +2122,7 @@ cache_replacement_policy <%= cache_replacement_policy %>
 
 # Uncomment and adjust the following to add a disk cache directory.
 #cache_dir ufs /var/spool/squid3 100 16 256
-cache_dir <%= cache_dir_type %> /var/spool/squid3 <%= cache_dir_size %> 16 256
+cache_dir <%= cache_dir_type %> <%= cache_dir %> <%= cache_dir_size %> 16 256
 
 #  TAG: store_dir_select_algorithm
 #   Set this to 'round-robin' as an alternative.
@@ -2803,7 +2803,7 @@ coredump_dir /var/spool/squid3
 #   By default, a URL rewriter is not used.
 #Default:
 # none
-url_rewrite_program /usr/bin/adzapper.wrapper
+<% if adzapper %>url_rewrite_program /usr/bin/adzapper.wrapper<% end %>
 
 #  TAG: url_rewrite_children
 #   The number of redirector processes to spawn. If you start
