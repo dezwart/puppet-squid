@@ -1,2 +1,2 @@
-# Ignore all vim .swp files
-*.swp
+# Ignore Vim swap files
+.*.swp
