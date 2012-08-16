@@ -19,6 +19,7 @@ class squid( $localnet_src = '10.0.0.0/8',
     $service = 'squid3'
     $user = 'proxy'
     $group = 'proxy'
+    $config_file = "/etc/$package/squid.conf"
 
     package { $package:
         ensure  => installed,
@@ -31,12 +32,12 @@ class squid( $localnet_src = '10.0.0.0/8',
         }
     }
 
-    file { "/etc/$package/squid.conf":
+    file { $config_file:
         ensure  => file,
         owner   => root,
         group   => root,
         mode    => '0644',
-        content => template('squid/squid.conf.erb'),
+        content => template("squid/$config_file.erb"),
         require => Package[$package],
     }
 
@@ -52,6 +53,7 @@ class squid( $localnet_src = '10.0.0.0/8',
         command => "/usr/sbin/service $service stop && /usr/sbin/$service -z",
         creates => "$cache_dir/00",
         notify  => Service[$service],
+        require => [ File[$cache_dir], File[$config_file] ],
     }
 
     service { $service:
