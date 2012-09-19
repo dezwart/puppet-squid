@@ -32,6 +32,14 @@ class squid( $localnet_src = '10.0.0.0/8',
         }
     }
 
+    # Handle aclParseIpData: Bad host/IP: '::1'
+    # See https://github.com/dezwart/puppet-squid/pull/4
+    if $lsbdistid == 'Ubuntu' and $lsbmajdistrelease <= 10 {
+        $ipv6 = false
+    } else {
+        $ipv6 = true
+    }
+
     file { $config_file:
         ensure  => file,
         owner   => root,
