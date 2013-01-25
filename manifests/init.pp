@@ -19,7 +19,7 @@ class squid( $localnet_src = '10.0.0.0/8',
   $service = 'squid3'
   $user = 'proxy'
   $group = 'proxy'
-  $config_file = "/etc/$package/squid.conf"
+  $config_file = "/etc/${package}/squid.conf"
 
   package { $package:
     ensure  => installed,
@@ -45,7 +45,7 @@ class squid( $localnet_src = '10.0.0.0/8',
     owner   => root,
     group   => root,
     mode    => '0644',
-    content => template("squid/$config_file.erb"),
+    content => template("squid/${config_file}.erb"),
     require => Package[$package],
   }
 
@@ -58,8 +58,8 @@ class squid( $localnet_src = '10.0.0.0/8',
   }
 
   exec { 'Init cache dir':
-    command => "/usr/sbin/service $service stop && /usr/sbin/$service -z",
-    creates => "$cache_dir/00",
+    command => "/usr/sbin/service ${service} stop && /usr/sbin/${service} -z",
+    creates => "${cache_dir}/00",
     notify  => Service[$service],
     require => [ File[$cache_dir], File[$config_file] ],
   }
@@ -73,4 +73,4 @@ class squid( $localnet_src = '10.0.0.0/8',
   }
 }
 
-/* vim: set ts=2 sw=2 sts=2 tw=0 et:*/
+# vim: set ts=2 sw=2 sts=2 tw=0 et:
