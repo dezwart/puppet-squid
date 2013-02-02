@@ -1,7 +1,7 @@
 Puppet Squid Module
 ===================
 
-Templated puppet class to allow for the definition of a squid HTTP proxy service. Currently targeted at squid3 on Debian 6.0 "Squeeze".
+Templated puppet class to allow for the definition of a squid HTTP proxy service. Currently supportst squid3 on Ubuntu 12.04 "Precise Pangolin" & Debian 6.0 "Squeeze".
 
 Based upon [Puppet Labs - Squid Configuration Patterns].
 
