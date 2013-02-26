@@ -1,2 +1,5 @@
 # Ignore Vim swap files
 .*.swp
+
+# Ignore rspec JUnit format output
+rspec.xml
