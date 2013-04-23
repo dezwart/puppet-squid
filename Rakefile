@@ -1,4 +1,4 @@
-require 'puppet-lint/tasks/puppet-lint' 
+require 'puppet-lint/tasks/puppet-lint'
 require 'rake'
 require 'rspec/core/rake_task'
 
