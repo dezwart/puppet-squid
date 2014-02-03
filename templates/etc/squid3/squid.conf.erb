@@ -2982,6 +2982,9 @@ coredump_dir /var/spool/squid3
 #
 
 # Add any of your own refresh_pattern entries above these.
+<% if @refresh_pattern -%>
+<%= @refresh_pattern %>
+<% end -%>
 refresh_pattern ^ftp:       1440    20% 10080
 refresh_pattern ^gopher:    1440    0%  1440
 refresh_pattern -i (/cgi-bin/|\?) 0 0%  0
@@ -3041,7 +3044,8 @@ refresh_pattern .       0   20% 4320
 #   this feature could make you liable for problems which it
 #   causes.
 #Default:
-# negative_ttl 0 seconds
+# negative_ttl 0 seconds<% if @negative_ttl %>
+negative_ttl <%= @negative_ttl %> seconds<% end %>
 
 #  TAG: positive_dns_ttl    time-units
 #   Upper limit on how long Squid will cache positive DNS responses.
