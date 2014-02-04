@@ -100,7 +100,7 @@ describe 'squid' do
 
   context 'ensure the absence of negative_ttl value by default' do
     it {
-      should contain_file('/etc/squid3/squid.conf').without_content(/^negative_ttl/)
+      should_not contain_file('/etc/squid3/squid.conf').with_content(/^negative_ttl/)
     }
   end
 
