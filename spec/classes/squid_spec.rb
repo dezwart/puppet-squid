@@ -85,5 +85,29 @@ describe 'squid' do
       should contain_package(adzapper)
     }
   end
+
+  context 'custom refresh_pattern' do
+    let(:params) {
+      {
+        :refresh_pattern => 'refresh_pattern .deb$ 0 20% 360 override-expire'
+      }
+    }
+
+    it {
+      should contain_file('/etc/squid3/squid.conf').with_content(/^refresh_pattern \.deb\$ 0 20/)
+    }
+  end
+
+  context 'custom negative_ttl value' do
+    let(:params) {
+      {
+        :negative_ttl => '1440'
+      }
+    }
+
+    it {
+      should contain_file('/etc/squid3/squid.conf').with_content(/^negative_ttl 1440 seconds$/)
+    }
+  end
 end
 
