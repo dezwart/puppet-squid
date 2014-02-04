@@ -98,6 +98,12 @@ describe 'squid' do
     }
   end
 
+  context 'ensure the absence of negative_ttl value by default' do
+    it {
+      should contain_file('/etc/squid3/squid.conf').without_content(/^negative_ttl/)
+    }
+  end
+
   context 'custom negative_ttl value' do
     let(:params) {
       {
