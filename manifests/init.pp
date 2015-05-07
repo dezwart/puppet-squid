@@ -13,6 +13,8 @@ class squid( $localnet_src = '10.0.0.0/8',
   $cachemgr_passwd = disable,
   $visible_hostname = undef,
   $snmp_port = undef,
+  $refresh_pattern = undef,
+  $negative_ttl = undef,
   $adzapper = false ) {
 
   $package = 'squid3'
