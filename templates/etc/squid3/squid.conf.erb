@@ -644,7 +644,7 @@
 #
 # Recommended minimum configuration:
 #
-acl manager proto cache_object
+<% if @lsbdistcodename != 'jessie' %>acl manager proto cache_object<% end -%>
 acl localhost src 127.0.0.1/32<% if ipv6 %> ::1<% end %>
 acl to_localhost dst 127.0.0.0/8 0.0.0.0/32<% if ipv6 %> ::1<% end %>
 
